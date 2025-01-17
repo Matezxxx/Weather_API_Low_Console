@@ -12,7 +12,7 @@ Přidán jednoduchý do-while cyklus pro možnost opakovaného vyhledávání da
 
 ## Jak nastavit
 1. Získejte API klíč z [OpenWeather API](https://openweathermap.org/).
-2. Vložte klíč do Program.cs...konkrétně jako hodnotu apiKey.
+2. Vložte klíč do appsettings.json.
 
 ===============================================================================================================
 ===============================================================================================================
@@ -31,4 +31,4 @@ To continue using the application, press "y" and hit Enter. To exit the applicat
 
 ## Setup
 Obtain an API key from OpenWeather API.
-Insert the key into apiKey (Program.cs).
+Insert the key into appsettings.json.

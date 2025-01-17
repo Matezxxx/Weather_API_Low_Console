@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using System.Text.Json;
+
 
 namespace Weather_API
 {
@@ -24,7 +26,7 @@ namespace Weather_API
                 try
                 {
                     // get the data about weather
-                    string apiKey = "7985f658b544ad536a6559be42f3310d"; // Here insert your API key
+                    string apiKey = LoadApiKeyFromSettings(); // Here insert your API key
                     string weatherData = await GetWeatherDataAsync(city, apiKey);
 
                     // Display data
@@ -40,8 +42,16 @@ namespace Weather_API
                 Console.WriteLine();
             }while (goOn=="y");
         }
+        static string LoadApiKeyFromSettings()
+        {
+            // Načti obsah souboru appsettings.json
+            string json = File.ReadAllText("appsettings.json");
 
-        static async Task<string> GetWeatherDataAsync(string city, string apiKey)
+            // Parsuj JSON a získej hodnotu ApiKey
+            var config = System.Text.Json.JsonSerializer.Deserialize<AppSettings>(json);
+            return config.ApiKey;
+        }
+            static async Task<string> GetWeatherDataAsync(string city, string apiKey)
         {
             string url = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=metric";
 
@@ -69,6 +79,7 @@ namespace Weather_API
             Console.WriteLine($"Temperature: {weather.Main.Temp} °C");
             Console.WriteLine($"Humidity: {weather.Main.Humidity}%");
             Console.WriteLine($"Wind Speed: {weather.Wind.Speed} m/s");
+            Console.WriteLine($"Pressure: {weather.Main.Pressure} Pa");
         }
     }
 

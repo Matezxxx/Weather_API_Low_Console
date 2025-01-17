@@ -10,6 +10,6 @@ namespace Weather_API
     {
         public double Temp { get; set; }
         public int Humidity { get; set; }
-
+        public int Pressure     { get; set; }
 }
 }
